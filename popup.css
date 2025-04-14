@@ -1,0 +1,322 @@
+/* popup.css - Styling for the extension interface */
+:root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #262626;
+    --text-primary: #e6e6e6;
+    --text-secondary: #a9a9a9;
+    --accent-color: #6d5acd;
+    --accent-hover: #5a48b6;
+    --border-color: #3a3a3a;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --item-hover: #2a2a2a;
+    --transition-speed: 0.3s;
+  }
+  
+  /* Light theme variables */
+  [data-theme="light"] {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --text-primary: #222222;
+    --text-secondary: #555555;
+    --accent-color: #5c4cb8;
+    --accent-hover: #4a3c9e;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --item-hover: #f0f0f0;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+  
+  .app-container {
+    width: 380px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  main {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #queue-container, #research-panel, #settings-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-speed) ease;
+    background-color: var(--bg-primary);
+    overflow-y: auto;
+  }
+  
+  #research-panel, #settings-panel {
+    transform: translateX(100%);
+  }
+  
+  #research-panel.active, #settings-panel.active {
+    transform: translateX(0);
+  }
+  
+  .panel-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .panel-header h2 {
+    margin-left: 12px;
+    font-size: 1.2rem;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  #queue-list {
+    list-style: none;
+  }
+  
+  .queue-item {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .queue-item:hover {
+    background-color: var(--item-hover);
+  }
+  
+  .queue-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  
+  .queue-item-text {
+    font-weight: 500;
+  }
+  
+  .queue-item-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .queue-item-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  
+  .icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+  }
+  
+  .icon-btn:hover {
+    background-color: var(--item-hover);
+  }
+  
+  .tab-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 50px);
+  }
+  
+  .tab-header {
+    display: flex;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .tab-btn {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  
+  .tab-btn.active {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+  }
+  
+  .tab-content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .tab-pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  
+  .tab-pane.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  
+  #google-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  #chatgpt-results, #google-results {
+    height: 100%;
+    position: relative;
+  }
+  
+  #chatgpt-response {
+    padding: 16px;
+    white-space: pre-wrap;
+  }
+  
+  .loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-primary);
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  #empty-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 16px;
+    color: var(--text-secondary);
+    gap: 12px;
+  }
+  
+  .settings-content {
+    padding: 16px;
+  }
+  
+  .setting-group {
+    margin-bottom: 20px;
+  }
+  
+  .setting-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .setting-group input, .setting-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+  
+  .help-text {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 6px;
+  }
+  
+  .primary-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .primary-btn:hover {
+    background-color: var(--accent-hover);
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  /* Animation for item additions */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .queue-item {
+    animation: fadeIn 0.3s ease;
+  }
