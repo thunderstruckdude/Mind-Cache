@@ -10,8 +10,8 @@ body {
     cursor: pointer;
     padding: 5px;
     border: none;
-    background-color: #007bff;
-    color: white;
+    background-color: #021932;
+    color: rgb(211, 189, 189);
     border-radius: 4px;
     transition: 0.2s;
   }
